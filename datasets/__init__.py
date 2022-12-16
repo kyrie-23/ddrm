@@ -183,6 +183,13 @@ def get_dataset(args, config):
                 transforms.ToTensor()])
             )
             test_dataset = dataset
+    elif config.data.dataset == 'DomainNet':
+        dataset = torchvision.datasets.ImageFolder(
+                os.path.join(args.exp, 'datasets', 'domain','painting'),
+                transform=transforms.Compose([partial(center_crop_arr, image_size=config.data.image_size),
+                transforms.ToTensor()])
+            )
+        test_dataset = dataset
     else:
         dataset, test_dataset = None, None
 
